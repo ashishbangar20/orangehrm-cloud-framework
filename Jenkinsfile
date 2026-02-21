@@ -6,7 +6,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/ashishbangar20/Ashish_oragneHRM_Automation.git'
+                    url: 'https://github.com/ashishbangar20/orangehrm-cloud-framework.git'
             }
         }
 
