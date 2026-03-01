@@ -23,27 +23,31 @@ pipeline {
 
     stages {
 
-        stage('Checkout Code') {
+        stage('Clean Workspace') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/ashishbangar20/orangehrm-cloud-framework.git'
+                deleteDir()
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 sh '''
+                echo "Building Docker image..."
                 docker build --no-cache -t $IMAGE_NAME .
                 '''
             }
         }
 
-        stage('Run Tests (Headless - Free Tier Safe)') {
+        stage('Run Tests (Headless Mode)') {
             steps {
                 sh '''
+                echo "Removing old container if exists..."
                 docker rm -f $CONTAINER_NAME 2>/dev/null || true
+
+                echo "Creating report directory..."
                 mkdir -p $REPORT_DIR
 
+                echo "Running test container..."
                 docker run --name $CONTAINER_NAME \
                 -v $(pwd)/$REPORT_DIR:/app/reports \
                 $IMAGE_NAME \
