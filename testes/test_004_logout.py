@@ -3,7 +3,7 @@ from pages.login_page import LoginPage
 from pages.dashboard_page import DashboardPage
 from config.config import USERNAME, PASSWORD
 
-
+@pytest.mark.smoke
 def test_logout(setup):
 
     driver = setup

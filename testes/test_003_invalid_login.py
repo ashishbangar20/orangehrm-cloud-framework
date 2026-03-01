@@ -1,7 +1,7 @@
 import pytest
 from pages.login_page import LoginPage
 
-
+@pytest.mark.smoke
 def test_invalid_login(setup):
 
     driver = setup

@@ -12,6 +12,7 @@ from pages.dashboard_page import DashboardPage
         ("WrongUser", "wrongpass", False),
     ]
 )
+@pytest.mark.smoke
 def test_login_param(setup, username, password, expected):
 
     driver = setup
