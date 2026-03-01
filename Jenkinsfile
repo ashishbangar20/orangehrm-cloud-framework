@@ -23,31 +23,18 @@ pipeline {
 
     stages {
 
-        stage('Clean Workspace') {
-            steps {
-                deleteDir()
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
-                sh '''
-                echo "Building Docker image..."
-                docker build --no-cache -t $IMAGE_NAME .
-                '''
+                sh 'docker build --no-cache -t $IMAGE_NAME .'
             }
         }
 
-        stage('Run Tests (Headless Mode)') {
+        stage('Run Tests') {
             steps {
                 sh '''
-                echo "Removing old container if exists..."
                 docker rm -f $CONTAINER_NAME 2>/dev/null || true
-
-                echo "Creating report directory..."
                 mkdir -p $REPORT_DIR
 
-                echo "Running test container..."
                 docker run --name $CONTAINER_NAME \
                 -v $(pwd)/$REPORT_DIR:/app/reports \
                 $IMAGE_NAME \
@@ -63,12 +50,10 @@ pipeline {
     }
 
     post {
-
         always {
             echo "Cleaning up container..."
             sh 'docker rm -f $CONTAINER_NAME 2>/dev/null || true'
             archiveArtifacts artifacts: 'reports/*.html', allowEmptyArchive: true
-            echo 'Pipeline Finished'
         }
 
         success {
