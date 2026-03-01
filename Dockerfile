@@ -1,14 +1,18 @@
-FROM python:3.10-slim
+FROM python:3.10
 
-# Install Chrome dependencies
+# Install required packages
 RUN apt-get update && apt-get install -y \
     wget \
     unzip \
     curl \
     gnupg \
-    chromium-driver \
     chromium \
+    chromium-driver \
+    --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
+
+# Set chromium binary path
+ENV CHROME_BIN=/usr/bin/chromium
 
 WORKDIR /app
 
@@ -19,4 +23,4 @@ RUN pip install -r requirements.txt
 
 ENV PYTHONUNBUFFERED=1
 
-CMD ["pytest", "-v"]
+CMD ["pytest"]
