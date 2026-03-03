@@ -1,3 +1,4 @@
+import shutil
 import os
 import subprocess
 import pytest
@@ -94,16 +95,22 @@ def pytest_runtest_makereport(item, call):
 # -------------------------------
 def pytest_sessionfinish(session, exitstatus):
     """
-    Automatically generate and open Allure report
-    after test execution completes.
+    Auto generate & open Allure report
+    ONLY when running locally.
     """
 
-    # Skip in CI environments
-    if os.getenv("CI"):
+    # 🔥 Strict CI check (Jenkins sets CI=true)
+    if os.getenv("CI", "").lower() == "true":
+        print("\nCI environment detected. Skipping Allure auto-open.\n")
         return
 
     results_dir = "allure-results"
     report_dir = "allure-report"
+
+    # If Allure CLI not installed, skip safely
+    if not shutil.which("allure"):
+        print("\nAllure CLI not found. Skipping report auto-generation.\n")
+        return
 
     if os.path.exists(results_dir):
 
