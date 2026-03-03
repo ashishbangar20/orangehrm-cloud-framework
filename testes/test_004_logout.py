@@ -1,19 +1,30 @@
 import pytest
+import allure
 from pages.login_page import LoginPage
 from pages.dashboard_page import DashboardPage
 from config.config import USERNAME, PASSWORD
 
-@pytest.mark.smoke
-def test_logout(setup):
 
-    driver = setup
-    login = LoginPage(driver)
-    dashboard = DashboardPage(driver)
+@allure.feature("Authentication Module")
+class TestLogout:
 
-    login.login(USERNAME, PASSWORD)
-    dashboard.wait_for_dashboard_menu()
+    @pytest.mark.smoke
+    @allure.story("User Logout")
+    def test_logout(self, setup):
 
-    dashboard.click_logout()
+        driver = setup
+        login = LoginPage(driver)
+        dashboard = DashboardPage(driver)
 
-    assert login.is_login_page_displayed(), \
-        "Logout failed - Login page not visible"
+        with allure.step("Login with valid credentials"):
+            login.login(USERNAME, PASSWORD)
+
+        with allure.step("Wait for dashboard to load"):
+            dashboard.wait_for_dashboard_menu()
+
+        with allure.step("Click logout button"):
+            dashboard.click_logout()
+
+        with allure.step("Verify login page is displayed after logout"):
+            assert login.is_login_page_displayed(), \
+                "Logout failed - Login page not visible"
