@@ -1,0 +1,10 @@
+{
+  "add_employee": {
+    "first_name": "Ashish",
+    "middle_name": "Krishna",
+    "last_name": "Bangar",
+    "employee_id": "0372",
+    "username": "ashishbangar20",
+    "password": "Test@12345"
+  }
+}

@@ -7,6 +7,7 @@ class DashboardPage(BasePage):
     DASHBOARD_MENU = (By.XPATH, "//span[text()='Dashboard']")
     PROFILE_ICON = (By.XPATH, "//span[@class='oxd-userdropdown-tab']")
     LOGOUT_BTN = (By.XPATH, "//a[text()='Logout']")
+    PIM_MENU = (By.XPATH, "//span[text()='PIM']")
 
     def wait_for_dashboard_menu(self):
         self.find_visible_element(self.DASHBOARD_MENU)
@@ -17,3 +18,6 @@ class DashboardPage(BasePage):
 
     def is_dashboard_displayed(self):
         return self.is_element_displayed(self.DASHBOARD_MENU)
+
+    def click_pim(self):
+        self.click(self.PIM_MENU)

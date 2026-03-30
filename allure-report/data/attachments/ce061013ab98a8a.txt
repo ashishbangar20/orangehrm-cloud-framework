@@ -1,8 +1,0 @@
-
-========== Execution Info ==========
-Browser   : chrome
-Headless  : True
-GRID_URL  : None
-====================================
-
-Starting Local Chrome WebDriver...

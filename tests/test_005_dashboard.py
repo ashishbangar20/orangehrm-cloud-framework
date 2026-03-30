@@ -4,7 +4,6 @@ from pages.login_page import LoginPage
 from pages.dashboard_page import DashboardPage
 from config.config import USERNAME, PASSWORD
 
-
 @allure.feature("Dashboard Module")
 class TestDashboard:
 
