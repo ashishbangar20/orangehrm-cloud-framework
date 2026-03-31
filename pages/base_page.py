@@ -3,12 +3,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import (
-    TimeoutException,
-    StaleElementReferenceException,
-    ElementClickInterceptedException,
-)
-
+from selenium.common.exceptions import (TimeoutException,StaleElementReferenceException,ElementClickInterceptedException,)
 
 class BasePage:
 
@@ -33,17 +28,16 @@ class BasePage:
         except TimeoutException:
             return []
 
-    def find_visible_element(self, locator):
+    def find_visible_element(self, locator, timeout=20):
         try:
-            return self.wait.until(EC.visibility_of_element_located(locator))
+            wait = WebDriverWait(self.driver, timeout)
+            return wait.until(EC.visibility_of_element_located(locator))
         except TimeoutException:
             raise TimeoutException(f"Element not visible: {locator}")
 
-
     def wait_for_url_contains(self, text, timeout=20):
         WebDriverWait(self.driver, timeout).until(
-            lambda driver: text in driver.current_url
-        )
+            lambda driver: text in driver.current_url)
 
     # ========================
     # WAIT METHODS
