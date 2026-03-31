@@ -39,6 +39,12 @@ class BasePage:
         except TimeoutException:
             raise TimeoutException(f"Element not visible: {locator}")
 
+
+    def wait_for_url_contains(self, text, timeout=20):
+        WebDriverWait(self.driver, timeout).until(
+            lambda driver: text in driver.current_url
+        )
+
     # ========================
     # WAIT METHODS
     # ========================
