@@ -20,4 +20,5 @@ class DashboardPage(BasePage):
         return self.is_element_displayed(self.DASHBOARD_MENU)
 
     def click_pim(self):
+        self.find_visible_element(self.PIM_MENU)
         self.click(self.PIM_MENU)
