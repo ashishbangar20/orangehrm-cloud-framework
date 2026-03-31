@@ -4,7 +4,7 @@ from pages.base_page import BasePage
 
 class PimPage(BasePage):
 
-    ADD_EMPLOYEE_BTN = (By.XPATH, "//a[text()='Add Employee']")
+    ADD_EMPLOYEE_BTN = (By.XPATH, "//*[contains(text(),'Add Employee')]")
     PERSONAL_DETAILS_HEADER = (By.XPATH, "//h6[text()='Personal Details']")
 
     def click_add_employee(self):
