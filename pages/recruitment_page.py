@@ -15,7 +15,7 @@ class RecruitmentPage(BasePage):
     SAVE_BUTTON = (By.XPATH, "//button[@type='submit']")
     SUCCESS_TOAST = (By.XPATH, "//div[contains(@class,'toast')]")
 
-    SEARCH_NAME = (By.XPATH, "//input[contains(@placeholder,'Type for hints')]")
+    SEARCH_NAME = (By.XPATH, "//div[@class='oxd-table-filter']//input[contains(@placeholder,'Type for hints')]")
     SEARCH_BUTTON = (By.XPATH, "//button[normalize-space()='Search']")
 
     # 🔹 Navigation
