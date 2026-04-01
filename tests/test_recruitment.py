@@ -25,8 +25,9 @@ class TestRecruitment:
         with allure.step("Login to application"):
             login.login("Admin", "admin123")
 
-        with allure.step("Navigate to Recruitment module"):
+        with allure.step("Navigate back to Recruitment list"):
             recruitment.go_to_recruitment()
+            driver.refresh()  # 💀 MAGIC FIX
 
         with allure.step("Click Add button"):
             recruitment.click_add()
